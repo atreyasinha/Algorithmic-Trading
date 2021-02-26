@@ -5,12 +5,10 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  font-family: 'Monofett', cursive;
+  font-size: 40px;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
 
 .btn-primary {
   color: #fff;
@@ -35,17 +33,6 @@ html {
   }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
@@ -61,6 +48,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: #000000 !important;
 }
 .footer {
   position: absolute;
@@ -68,4 +56,24 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+  background-color:#80ffdb;
+}
+
+h1 {
+    color:#fff;
+}
+
+.hero-text {
+    font-weight:400;
+    line-height:1.8;
+    color:#fff;
+}
+
+.why-us-sub-heading {
+    font-weight: 500;
+    color: blueviolet;
+}
+
+.text-white {
+    color:aliceblue #fff;
 }

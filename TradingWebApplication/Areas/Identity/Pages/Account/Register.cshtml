@@ -7,70 +7,77 @@
 <br />
 <br />
 
+<div class="container">
 
-<div class="text-center">
-    
-    <div class="container">
-        <p style="color:dimgray;">
-            Join O(trade)
-        </p>
-        <h1>Create a new account.</h1>
 
-        <p class="text-white">
-            O(trade) is your guide to financial wellness. We'll help you invest, save and spend smarter.
-        </p>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div class="card" style="background-color:#161B22">
+        <div class="card-body">
+            <div class="container">
+                <h1>Create a new account.</h1>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="text-white" asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="text-white" asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-
-            </div>
-
-            <br />
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="text-white" asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <br />
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                </div>
-
-            </div>
-            <hr />
-            <div class="form-group">
-                <button type="submit" style="background-color: #6930c3" class="btn btn-lg btn-primary">Register</button>
-
-            </div>
-            <p style="color:dimgray">
-                Sign up means you agree to Terms of Service and Privacy Policy
-            </p>
-            <div class="form-group">
-                <p style="color:dimgray">
-                    Already have a account with us! <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a>
+                <p class="text-white">
+                    O(trade) is your guide to financial wellness. We'll help you invest, save and spend smarter.
                 </p>
+
+                <br />
+                <br />
+                <br />
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="text-white" asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="text-white" asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="text-white" asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <br />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <button type="submit" style="background-color: #6930c3" class="btn btn-lg btn-primary">Register</button>
+
+                    </div>
+                    <p style="color:dimgray">
+                        Sign up means you agree to Terms of Service and Privacy Policy
+                    </p>
+                    <div class="form-group">
+                        <p style="color:dimgray">
+                            Already have a account with us! <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a>
+                        </p>
+                    </div>
+
+                </form>
+
             </div>
 
-        </form>
+        </div>
+
+
+
     </div>
+
     <br />
     <br />
     <br />
@@ -83,10 +90,8 @@
         Commission-free trading means $0 commission trading on self-directed individual cash or margin brokerage accounts that trade U.S. listed securities via mobile devices or web. Keep in mind, other fees such as trading (non-commission) fees, Gold subscription fees, wire transfer fees, and paper statement fees may apply to your brokerage account.
 
     </p>
-</div>
 
-<br />
-<br />
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

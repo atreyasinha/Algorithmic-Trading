@@ -9,7 +9,11 @@
 
 
 <div class="text-center">
+    
     <div class="container">
+        <p style="color:dimgray;">
+            Join O(trade)
+        </p>
         <h1>Create a new account.</h1>
 
         <p class="text-white">
@@ -60,8 +64,8 @@
                 Sign up means you agree to Terms of Service and Privacy Policy
             </p>
             <div class="form-group">
-                <p>
-                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Don't Have An Account?</a>
+                <p style="color:dimgray">
+                    Already have a account with us! <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Sign In</a>
                 </p>
             </div>
 
@@ -81,6 +85,8 @@
     </p>
 </div>
 
+<br />
+<br />
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

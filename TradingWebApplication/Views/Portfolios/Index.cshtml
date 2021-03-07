@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TradingWebApplication.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Last_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alpaca_Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alpaca_Secret_Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Portfolio_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profit_Loss)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alpaca_Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alpaca_Secret_Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Portfolio_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profit_Loss)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TradingWebApplication.Models;
 
 namespace TradingWebApplication.Data
 {
@@ -12,5 +13,6 @@ namespace TradingWebApplication.Data
             : base(options)
         {
         }
+        public DbSet<TradingWebApplication.Models.Portfolio> Portfolio { get; set; }
     }
 }

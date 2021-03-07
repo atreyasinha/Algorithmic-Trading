@@ -2,7 +2,7 @@
 
 namespace TradingWebApplication.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class init_portfolio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

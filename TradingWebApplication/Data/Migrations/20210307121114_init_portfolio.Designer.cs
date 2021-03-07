@@ -10,8 +10,8 @@ using TradingWebApplication.Data;
 namespace TradingWebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210307120612_init")]
-    partial class init
+    [Migration("20210307121114_init_portfolio")]
+    partial class init_portfolio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

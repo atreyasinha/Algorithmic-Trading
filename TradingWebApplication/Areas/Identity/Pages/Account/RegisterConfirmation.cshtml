@@ -4,19 +4,49 @@
     ViewData["Title"] = "Register confirmation";
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
-    }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
-}
+
+<div class="container text-center">
+    <br />
+    <br />
+    <br />
+
+    <div class="card" style="background-color:#161B22">
+        <div class="card-body">
+
+            <a href="https://alpaca.markets/" target="_blank">
+                <img src="https://alpaca.markets/docs/images/alpacalogo.png" />
+            </a>
+
+            <br />
+            <br />
+            <br />
+
+            <h2 class="text-white">
+                Alpaca is our proud trade partner.
+            </h2>
+
+            <p class="text-white">For more information. Go to <a href="https://alpaca.markets/" target="_blank">Alpaca Markets</a></p>
+
+            <br />
+            <br />
+            <br />
+
+            <div class="form-group">
+                @{
+                    if (@Model.DisplayConfirmAccountLink)
+                    {
+                        <a id="confirm-link" class="btn btn-lg" href="@Model.EmailConfirmationUrl" style="background-color:#fcd600">
+                            Continue
+                        </a>
+                    }
+                }
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+</div>

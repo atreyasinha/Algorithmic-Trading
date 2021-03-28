@@ -149,5 +149,11 @@ namespace TradingWebApplication.Controllers
         {
             return _context.Portfolio.Any(e => e.Id == id);
         }
+
+        // GET: Portfolios/daytrade
+        public async Task<IActionResult> DayTrade()
+        {
+            return View();
+        }
     }
 }

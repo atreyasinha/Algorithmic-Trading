@@ -155,5 +155,11 @@ namespace TradingWebApplication.Controllers
         {
             return View();
         }
+
+        // GET: Portfolios/swingtrade
+        public async Task<IActionResult> SwingTrade()
+        {
+            return View();
+        }
     }
 }

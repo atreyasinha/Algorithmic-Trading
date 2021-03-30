@@ -161,5 +161,11 @@ namespace TradingWebApplication.Controllers
         {
             return View();
         }
+
+        // GET: Portfolios/longtrade
+        public async Task<IActionResult> LongTrade()
+        {
+            return View();
+        }
     }
 }

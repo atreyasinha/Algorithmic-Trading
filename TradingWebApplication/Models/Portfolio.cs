@@ -14,6 +14,7 @@ namespace TradingWebApplication.Models
         public string Alpaca_Secret_Key { get; set; }
         public double Portfolio_Value { get; set; }
         public double Profit_Loss { get; set; }
+        public int trade_type { get; set; }
 
         public Portfolio()
         {

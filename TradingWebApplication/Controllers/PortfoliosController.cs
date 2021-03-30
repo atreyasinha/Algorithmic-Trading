@@ -54,7 +54,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss")] Portfolio portfolio)
+        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,trade_type")] Portfolio portfolio)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss")] Portfolio portfolio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,trade_type")] Portfolio portfolio)
         {
             if (id != portfolio.Id)
             {

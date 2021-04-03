@@ -26,7 +26,7 @@ namespace TradingWebApplication.Controllers
         }
 
         // GET: Portfolios/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -54,7 +54,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss")] Portfolio portfolio)
+        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace TradingWebApplication.Controllers
         }
 
         // GET: Portfolios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss")] Portfolio portfolio)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,First_Name,Last_Name,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
         {
             if (id != portfolio.Id)
             {
@@ -117,7 +117,7 @@ namespace TradingWebApplication.Controllers
         }
 
         // GET: Portfolios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace TradingWebApplication.Controllers
         // POST: Portfolios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var portfolio = await _context.Portfolio.FindAsync(id);
             _context.Portfolio.Remove(portfolio);
@@ -145,7 +145,7 @@ namespace TradingWebApplication.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PortfolioExists(int id)
+        private bool PortfolioExists(string id)
         {
             return _context.Portfolio.Any(e => e.Id == id);
         }

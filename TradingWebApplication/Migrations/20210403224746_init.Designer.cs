@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TradingWebApplication.Data;
 
-namespace TradingWebApplication.Data.Migrations
+namespace TradingWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210403224746_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,21 +223,13 @@ namespace TradingWebApplication.Data.Migrations
 
             modelBuilder.Entity("TradingWebApplication.Models.Portfolio", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Alpaca_Key")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Alpaca_Secret_Key")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("First_Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Last_Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Portfolio_Value")
@@ -244,7 +238,7 @@ namespace TradingWebApplication.Data.Migrations
                     b.Property<double>("Profit_Loss")
                         .HasColumnType("float");
 
-                    b.Property<int>("trade_type")
+                    b.Property<int>("Trade_Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

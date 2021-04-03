@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TradingWebApplication.Data;
 
-namespace TradingWebApplication.Data.Migrations
+namespace TradingWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210329174757_DatabaseCreate")]
-    partial class DatabaseCreate
+    [Migration("20210403230627_init_string_key")]
+    partial class init_string_key
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,42 +221,15 @@ namespace TradingWebApplication.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TradingWebApplication.Models.Alpaca_Key", b =>
-                {
-                    b.Property<int>("Aplaca_KeyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Secret_Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Aplaca_KeyId");
-
-                    b.ToTable("Alpaca_Keys");
-                });
-
             modelBuilder.Entity("TradingWebApplication.Models.Portfolio", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Alpaca_KeyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("First_Name")
-                        .IsRequired()
+                    b.Property<string>("Alpaca_Key")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
+                    b.Property<string>("Alpaca_Secret_Key")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Portfolio_Value")
@@ -265,9 +238,10 @@ namespace TradingWebApplication.Data.Migrations
                     b.Property<double>("Profit_Loss")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Trade_Type")
+                        .HasColumnType("int");
 
-                    b.HasIndex("Alpaca_KeyId");
+                    b.HasKey("Id");
 
                     b.ToTable("Portfolio");
                 });
@@ -321,17 +295,6 @@ namespace TradingWebApplication.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TradingWebApplication.Models.Portfolio", b =>
-                {
-                    b.HasOne("TradingWebApplication.Models.Alpaca_Key", "Alpaca_Key")
-                        .WithMany()
-                        .HasForeignKey("Alpaca_KeyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Alpaca_Key");
                 });
 #pragma warning restore 612, 618
         }

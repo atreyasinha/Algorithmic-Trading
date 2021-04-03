@@ -1,4 +1,7 @@
 ﻿@model TradingWebApplication.Models.Portfolio
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Swing Trading";
@@ -29,7 +32,16 @@
 
             <br />
 
-            <button type="submit" style="background-color: #6930c3" class="btn btn-lg btn-primary">Authorize</button>
+            <form asp-action="UpdateTrade">
+                <input type="hidden" asp-for="Id" value="@User.Identity.Name" />
+                <input type="hidden" asp-for="Alpaca_Key" value="@Model.Alpaca_Key" />
+                <input type="hidden" asp-for="Alpaca_Secret_Key" value="@Model.Alpaca_Secret_Key" />
+                <input type="hidden" asp-for="Portfolio_Value" value="@Model.Portfolio_Value" />
+                <input type="hidden" asp-for="Profit_Loss" value="@Model.Profit_Loss" />
+                <input type="hidden" asp-for="Trade_Type" value="2" />
+                <button type="submit" style="background-color: #6930c3" class="btn btn-lg btn-primary">Authorize</button>
+            </form>
+
         </div>
     </div>
     <br />

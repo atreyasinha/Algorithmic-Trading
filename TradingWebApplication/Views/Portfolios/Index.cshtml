@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<TradingWebApplication.Models.Portfolio>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -9,14 +12,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<a asp-action="DayTrade" asp-route-id="@User.Identity.Name">Day Trade</a> |
+<a asp-action="SwingTrade" asp-route-id="@User.Identity.Name">Swing Trade</a> |
+<a asp-action="LongTrade" asp-route-id="@User.Identity.Name">Long Trade</a>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Last_Name)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Alpaca_Key)
@@ -30,36 +34,40 @@
             <th>
                 @Html.DisplayNameFor(model => model.Profit_Loss)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trade_Type)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.First_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alpaca_Key)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alpaca_Secret_Key)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Portfolio_Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Profit_Loss)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alpaca_Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alpaca_Secret_Key)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Portfolio_Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profit_Loss)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trade_Type)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

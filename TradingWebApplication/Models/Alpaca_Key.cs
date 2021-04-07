@@ -8,10 +8,6 @@ namespace TradingWebApplication.Models
 {
     public class Alpaca_Key
     {
-<<<<<<< HEAD
-=======
-        //Database ID
->>>>>>> e6b1a82 (Key is now primary Key for Alpaca_Keys - DB is seeded on creation with keys)
         //Alpaca Key
         [Key]
         public string Key { get; set; }

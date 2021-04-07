@@ -219,16 +219,57 @@ namespace TradingWebApplication.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TradingWebApplication.Models.Alpaca_Key", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Secret_Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("Alpaca_Keys");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "PKA6END5AE2FCFY4BJ8S",
+                            Secret_Key = "Q9rNaxmOTMTgVIVyEHnnGO9jEvqP17cgaC2MOvyo"
+                        },
+                        new
+                        {
+                            Key = "PKO3D0U580U6LZ1BY4BJ",
+                            Secret_Key = "q2ilG2CgqewreQ9a9vicwn80GPZN1pATbLv4LkvF"
+                        },
+                        new
+                        {
+                            Key = "PKY4HXGTXXR9I7EYH7S2",
+                            Secret_Key = "w2R0XaDIodMaPgSaMUSJOvzIrkkE63bjKzoFdWNV"
+                        },
+                        new
+                        {
+                            Key = "PKSG8HUEQDFECZBI8PZ9",
+                            Secret_Key = "OGmuwdATW3d4Sr8AlYhwi5NF0jAlE06VkQJoSJsK"
+                        },
+                        new
+                        {
+                            Key = "PK2AZPW94C9WIILX53Y1",
+                            Secret_Key = "wAYYgsxlOQKt0rlX0zAdeGrK67eqRzpldKkIgdJP"
+                        });
+                });
+
             modelBuilder.Entity("TradingWebApplication.Models.Portfolio", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Alpaca_Key")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Alpaca_KeyId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Alpaca_Secret_Key")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Alpaca_KeyKey")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Portfolio_Value")
                         .HasColumnType("float");
@@ -240,6 +281,8 @@ namespace TradingWebApplication.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Alpaca_KeyKey");
 
                     b.ToTable("Portfolio");
                 });
@@ -293,6 +336,15 @@ namespace TradingWebApplication.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TradingWebApplication.Models.Portfolio", b =>
+                {
+                    b.HasOne("TradingWebApplication.Models.Alpaca_Key", "Alpaca_Key")
+                        .WithMany()
+                        .HasForeignKey("Alpaca_KeyKey");
+
+                    b.Navigation("Alpaca_Key");
                 });
 #pragma warning restore 612, 618
         }

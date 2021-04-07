@@ -3,10 +3,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TradingWebApplication.Migrations
 {
-    public partial class init_string_key : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Alpaca_Keys",
+                columns: table => new
+                {
+                    Key = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Secret_Key = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alpaca_Keys", x => x.Key);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -51,8 +63,8 @@ namespace TradingWebApplication.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Alpaca_Key = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Alpaca_Secret_Key = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Alpaca_KeyId = table.Column<int>(type: "int", nullable: false),
+                    Alpaca_KeyKey = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Portfolio_Value = table.Column<double>(type: "float", nullable: false),
                     Profit_Loss = table.Column<double>(type: "float", nullable: false),
                     Trade_Type = table.Column<int>(type: "int", nullable: false)
@@ -60,6 +72,12 @@ namespace TradingWebApplication.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Portfolio", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Portfolio_Alpaca_Keys_Alpaca_KeyKey",
+                        column: x => x.Alpaca_KeyKey,
+                        principalTable: "Alpaca_Keys",
+                        principalColumn: "Key",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,6 +186,18 @@ namespace TradingWebApplication.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Alpaca_Keys",
+                columns: new[] { "Key", "Secret_Key" },
+                values: new object[,]
+                {
+                    { "PKA6END5AE2FCFY4BJ8S", "Q9rNaxmOTMTgVIVyEHnnGO9jEvqP17cgaC2MOvyo" },
+                    { "PKO3D0U580U6LZ1BY4BJ", "q2ilG2CgqewreQ9a9vicwn80GPZN1pATbLv4LkvF" },
+                    { "PKY4HXGTXXR9I7EYH7S2", "w2R0XaDIodMaPgSaMUSJOvzIrkkE63bjKzoFdWNV" },
+                    { "PKSG8HUEQDFECZBI8PZ9", "OGmuwdATW3d4Sr8AlYhwi5NF0jAlE06VkQJoSJsK" },
+                    { "PK2AZPW94C9WIILX53Y1", "wAYYgsxlOQKt0rlX0zAdeGrK67eqRzpldKkIgdJP" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -206,6 +236,11 @@ namespace TradingWebApplication.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Portfolio_Alpaca_KeyKey",
+                table: "Portfolio",
+                column: "Alpaca_KeyKey");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -233,6 +268,9 @@ namespace TradingWebApplication.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Alpaca_Keys");
         }
     }
 }

@@ -270,6 +270,17 @@ namespace TradingWebApplication.Migrations
 
                     b.Property<string>("Alpaca_KeyKey")
                         .HasColumnType("nvarchar(450)");
+<<<<<<< HEAD:TradingWebApplication/Migrations/ApplicationDbContextModelSnapshot.cs
+=======
+
+                    b.Property<string>("First_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Last_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> e6b1a82 (Key is now primary Key for Alpaca_Keys - DB is seeded on creation with keys):TradingWebApplication/Data/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<double>("Portfolio_Value")
                         .HasColumnType("float");

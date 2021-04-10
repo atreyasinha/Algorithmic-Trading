@@ -7,15 +7,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Portfolio</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
-<a asp-action="DayTrade" asp-route-id="@User.Identity.Name">Day Trade</a> |
-<a asp-action="SwingTrade" asp-route-id="@User.Identity.Name">Swing Trade</a> |
-<a asp-action="LongTrade" asp-route-id="@User.Identity.Name">Long Trade</a>
+@* Added links to these pages on the TradingOptions page, commented out here for now. *@
+@*
+    <a asp-action="DayTrade" asp-route-id="@User.Identity.Name">Day Trade</a> |
+    <a asp-action="SwingTrade" asp-route-id="@User.Identity.Name">Swing Trade</a> |
+    <a asp-action="LongTrade" asp-route-id="@User.Identity.Name">Long Trade</a>
+*@
 <table class="table">
     <thead>
         <tr>
@@ -71,3 +73,5 @@
         }
     </tbody>
 </table>
+
+

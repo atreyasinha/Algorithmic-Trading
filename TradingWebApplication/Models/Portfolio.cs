@@ -12,11 +12,13 @@ namespace TradingWebApplication.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
-        //The ID (in the Database) Referencing the Alpaca_Key object
+
+        [ForeignKey("Alpaca_Key")]
+        public string Alpaca_KeyId { get; set; }
+
         [Required]
-        public int Alpaca_KeyId { get; set; }
-        //The Alaca_Key Object
         public Alpaca_Key Alpaca_Key { get; set; }
+
         [Required]
         public double Portfolio_Value { get; set; }
         [Required]

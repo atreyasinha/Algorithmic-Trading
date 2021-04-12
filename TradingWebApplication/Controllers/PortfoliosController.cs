@@ -22,7 +22,9 @@ namespace TradingWebApplication.Controllers
         // GET: Portfolios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Portfolio.Include(b => b.Alpaca_Key).ToListAsync());
+            var test = _context.Portfolio.ToList();
+            test.ForEach(b => b.Alpaca_Key = _context.Alpaca_Keys.Find(b.Alpaca_KeyId) );
+            return View(test);
         }
 
         // GET: Portfolios/Details/5
@@ -88,7 +90,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Alpaca_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
         {
             if (id != portfolio.Id)
             {
@@ -160,8 +162,8 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
+            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
             if (portfolio == null)
             {
                 return NotFound();
@@ -178,8 +180,8 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
+            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
             if (portfolio == null)
             {
                 return NotFound();
@@ -196,8 +198,8 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
+            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
             if (portfolio == null)
             {
                 return NotFound();
@@ -214,7 +216,8 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio.FindAsync(id);
+            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
+            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
             if (portfolio == null)
             {
                 return NotFound();
@@ -227,7 +230,7 @@ namespace TradingWebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateTrade(string id, [Bind("Id,Alpaca_Key,Alpaca_Secret_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
+        public async Task<IActionResult> UpdateTrade(string id, [Bind("Id,Alpaca_Key,Portfolio_Value,Profit_Loss,Trade_Type")] Portfolio portfolio)
         {
             if (id != portfolio.Id)
             {

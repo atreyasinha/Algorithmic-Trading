@@ -14,10 +14,10 @@ namespace TradingWebApplication.Models
         public string Id { get; set; }
 
         [ForeignKey("Alpaca_Key")]
-        public string Alpaca_KeyId { get; set; }
-
+        public string Alpaca_KeyId {get; set;}
+        
         [Required]
-        public Alpaca_Key Alpaca_Key { get; set; }
+        public virtual Alpaca_Key Alpaca_Key { get; set; }
 
         [Required]
         public double Portfolio_Value { get; set; }

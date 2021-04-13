@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TradingWebApplication.Data;
+using TradingWebApplication.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace TradingWebApplication.Areas.Identity.Pages.Account
 {
@@ -23,17 +27,20 @@ namespace TradingWebApplication.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -73,12 +80,19 @@ namespace TradingWebApplication.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
-            {
+            {   
+                //Get the first alpaca_Key that is not associated with a Portfolio...
+                Alpaca_Key alpaca_Key = _context.Alpaca_Keys.Include(b => b.Portfolio).FirstOrDefault(b => b.Portfolio == null);
+                if (alpaca_Key == null)
+                    return this.NotFound(); //Coniser replacing with better error warning...
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    _context.Portfolio.Add(new Portfolio{Id=user.Email , Alpaca_Key = alpaca_Key, Alpaca_KeyId = alpaca_Key.Key, Portfolio_Value=10000, Profit_Loss=0});
+                    await _context.SaveChangesAsync();
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

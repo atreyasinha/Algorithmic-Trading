@@ -338,3 +338,9 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+.vscode/launch.json
+.vscode/tasks.json
+TradingWebApplication/Migrations/20210412214521_init.Designer.cs
+TradingWebApplication/Migrations/20210412214521_init.cs
+TradingWebApplication/Migrations/ApplicationDbContextModelSnapshot.cs
+.gitignore

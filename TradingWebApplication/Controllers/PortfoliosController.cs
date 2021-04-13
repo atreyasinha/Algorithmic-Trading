@@ -22,8 +22,7 @@ namespace TradingWebApplication.Controllers
         // GET: Portfolios
         public async Task<IActionResult> Index()
         {
-            var test = _context.Portfolio.ToList();
-            test.ForEach(b => b.Alpaca_Key = _context.Alpaca_Keys.Find(b.Alpaca_KeyId) );
+            var test = await _context.Portfolio.Include(b => b.Alpaca_Key).ToListAsync();
             return View(test);
         }
 
@@ -162,8 +161,7 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
-            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
+            var portfolio = await _context.Portfolio.Include(b => b.Alpaca_Key).FirstOrDefaultAsync(m => m.Id == id);
             if (portfolio == null)
             {
                 return NotFound();
@@ -180,8 +178,7 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
-            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
+            var portfolio = await _context.Portfolio.Include(b => b.Alpaca_Key).FirstOrDefaultAsync(m => m.Id == id);
             if (portfolio == null)
             {
                 return NotFound();
@@ -198,8 +195,7 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
-            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
+            var portfolio = await _context.Portfolio.Include(b => b.Alpaca_Key).FirstOrDefaultAsync(m => m.Id == id);
             if (portfolio == null)
             {
                 return NotFound();
@@ -216,8 +212,7 @@ namespace TradingWebApplication.Controllers
                 return NotFound();
             }
 
-            var portfolio = await _context.Portfolio.FirstOrDefaultAsync(m => m.Id == id);
-            portfolio.Alpaca_Key = await _context.Alpaca_Keys.FirstOrDefaultAsync(Alpaca_Key => Alpaca_Key.Key == portfolio.Alpaca_KeyId);
+            var portfolio = await _context.Portfolio.Include(b => b.Alpaca_Key).FirstOrDefaultAsync(m => m.Id == id);
             if (portfolio == null)
             {
                 return NotFound();

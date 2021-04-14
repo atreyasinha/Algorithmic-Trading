@@ -87,3 +87,8 @@ h1 {
 #tradingOptionsHeader {
     color: #2D7AD7;
 }
+
+#chartContainer {
+    width:700px;
+    height:450px;
+}

@@ -18,17 +18,6 @@ namespace TradingWebApplication.Controllers
         {
             _context = context;
         }
-        // GET: Trading Options
-        public IActionResult TradingOptions()
-        {
-            return View();
-        }
-
-        // GET: Overview
-        public IActionResult Overview()
-        {
-            return View();
-        }
 
         // GET: Portfolios
         public async Task<IActionResult> Index()

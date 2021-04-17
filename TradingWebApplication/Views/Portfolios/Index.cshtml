@@ -11,39 +11,25 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <div class="container">
-        <div class="jumbotron">
-            <h1>Let's Trade !</h1>
+        <div class="container align-items-center" id="chartContainer">
+            <br />
+            <canvas id="myChart" width="800" height="350"></canvas>
         </div>
 
-        <div class="container-fluid" id="welcomeTrading">
-            <p>
-                Using our custom algorithms you will be able to simulate stock market trading in a risk free environment.
-                This is done in the hopes that different investment strategies can be tested, tracked, and refined without consequence.
-                Don't worry if you have little to no experience with stock market trading, our application is designed for you to have fun
-                in a no risk environment and will help you learn about investing at the same time.
-                <br />
-                Have fun trading !
-            </p>
-        </div>
-        <div class="container align-items-center" id="chartContainer">
-            <h3 class="text-center" id="tradingOptionsHeader"> Profits/Losses</h3>
-            <br />
-            <canvas id="myChart" width="650" height="350"style="background-color: white;"></canvas>
-        </div>
-            
-       
+
 
         <div class="container-fluid" style="padding-top:0;">
             <br />
-            <h3 id="tradingOptionsHeader">You have three trading options to select from:</h3>
             <br />
             <div class="row align-items-center">
                 <div class="col">
-                    <div class="card">
+                    <div class="card" id="tradingCards">
                         <div class="card-body">
-                            <h3>Day Trade</h3>
-                            <p>
+                            <h3 style="color:white;">Day Trade</h3>
+                            <p style="color:dimgray;">
                                 Will buy and sell stocks within the same trading day so all positions are closed by the time the
                                 market closes for the day.
                             </p>
@@ -53,10 +39,10 @@
                 </div>
 
                 <div class="col">
-                    <div class="card">
+                    <div class="card" id="tradingCards">
                         <div class="card-body">
-                            <h3>Swing Trade</h3>
-                            <p>
+                            <h3 style="color:white;">Swing Trade</h3>
+                            <p style="color:dimgray;">
                                 Will buy and sell stock to capture short to medium term gains in stock over a period of a few days to
                                 several weeks.
                                 <br />
@@ -67,10 +53,10 @@
                 </div>
 
                 <div class="col">
-                    <div class="card">
+                    <div class="card" id="tradingCards">
                         <div class="card-body">
-                            <h3>Long Trade</h3>
-                            <p>
+                            <h3 style="color:white;">Long Trade</h3>
+                            <p style="color:dimgray;">
                                 Will buy and sell stock to establish long positions in securities such as stocks, funds, currencies,
                                 options, and futures.
                             </p>
@@ -88,26 +74,45 @@
 
     <script>
         var ctx = document.getElementById('myChart');
-
-        var equity = [100000, 104000, 105000, 106000, 108000, 105000, 107000, 104000, 108000, 109000, 110000, 108000];
+  
+        var equity = [100000, 104000, 105000, 106000, 108000, 105000, 107000, 104000, 108000, 109000, 108000, 109500];
         var times = ['5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',];
 
         var myChart = new Chart(ctx, {
             type: 'line',
+            options: {
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: 'rgb(255,255,255)',
+                        },
+                    }],
+                    yAxes: [{
+                        display: false
+                    }],                 
+                }
+            },
             data: {
                 labels: times,
-                backgroundColor: 'rgb(255, 255, 255)',
+                color: 'rgb(255,255,255)',
+                backgroundColor: 'rgb(0, 0, 0)',
                 datasets: [{
                     data: equity,
                     label: "Equity",
                     borderColor: 'rgb(24, 252, 2)',
-                    pointBackgroundColor: 'rgb(45, 122, 215)',
+                    pointBackgroundColor: 'rgb(24, 252, 2)',
+                    pointBorderColor: 'rgb(24, 252, 2)',
+                    pointHitRadius: 3,
                     color: 'rgb(0, 0, 0)',
                     fill:false,
                     tension:0.1
                 }]
-            },
+            }
         })
+       
     </script>
 </body>
 

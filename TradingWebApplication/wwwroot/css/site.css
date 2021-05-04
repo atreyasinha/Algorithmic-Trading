@@ -74,17 +74,11 @@ h1 {
     color: blueviolet;
 }
 
-.jumbotron {
-    background-image: url(https://deadline.com/wp-content/uploads/2020/07/stock-market.jpg?w=681&h=383&crop=1);
-    background-size: 100% 100%;
-}
-
-
-#chartContainer {
-    width: 1000px;
-    height: 450px;
-}
 
 #tradingCards {
     background-color:#161B22;
+}
+
+#card_size {
+    font-size:18px;
 }

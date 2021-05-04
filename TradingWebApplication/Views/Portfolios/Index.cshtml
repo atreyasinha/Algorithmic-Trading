@@ -5,115 +5,73 @@
 
 @{
     ViewData["Title"] = "Dashboard";
+    var alpaca_key = "";
+    var alpaca_secret_key = "";
 }
 
+@foreach (var item in Model)
+{
+    if (item.Id == @User.Identity.Name)
+    {
 
-<body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        alpaca_key = @item.Alpaca_Key.Key;
+        alpaca_secret_key = @item.Alpaca_Key.Secret_Key;
+    }
+
+}
+
+<input type="hidden" id="PassingAlpacaKey" value=@alpaca_key>
+<input type="hidden" id="PassingAlpacaSecretKey" value=@alpaca_secret_key>
     <div class="container">
-        <div class="container align-items-center" id="chartContainer">
-            <br />
-            <canvas id="myChart" width="800" height="350"></canvas>
-        </div>
+            <div id="root"  />
+            <script src="~/dist/index.js"></script>
 
-
-
-        <div class="container-fluid" style="padding-top:0;">
-            <br />
-            <br />
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="card" id="tradingCards">
-                        <div class="card-body">
-                            <h3 style="color:white;">Day Trade</h3>
-                            <p style="color:dimgray;">
-                                Will buy and sell stocks within the same trading day so all positions are closed by the time the
-                                market closes for the day.
-                            </p>
-                            <a asp-action="DayTrade" asp-route-id="@User.Identity.Name">Day Trade</a>
+            <div class="container-fluid" style="padding-top:0;">
+                <br />
+                <br />
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="card" id="tradingCards">
+                            <div class="card-body">
+                                <h3 style="color:white;">Day Trade</h3>
+                                <p style="color:dimgray;" id="card_size">
+                                    Will buy and sell stocks within the same trading day so all positions are closed by the time the
+                                    market closes for the day.
+                                </p>
+                                <a asp-action="DayTrade" asp-route-id="@User.Identity.Name">Day Trade</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" id="tradingCards">
+                            <div class="card-body">
+                                <h3 style="color:white;">Swing Trade</h3>
+                                <p style="color:dimgray;"  id="card_size">
+                                    Will buy and sell stock to capture short to medium term gains in stock over a period of a few days to
+                                    several weeks.
+                                    <br />
+                                </p>
+                                <a asp-action="SwingTrade" asp-route-id="@User.Identity.Name">Swing Trade</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" id="tradingCards">
+                            <div class="card-body">
+                                <h3 style="color:white;">Long Trade</h3>
+                                <p style="color:dimgray;"  id="card_size">
+                                    Will buy and sell stock to establish long positions in securities such as stocks, funds, currencies,
+                                    options, and futures.
+                                </p>
+                                <a asp-action="LongTrade" asp-route-id="@User.Identity.Name">Long Trade</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col">
-                    <div class="card" id="tradingCards">
-                        <div class="card-body">
-                            <h3 style="color:white;">Swing Trade</h3>
-                            <p style="color:dimgray;">
-                                Will buy and sell stock to capture short to medium term gains in stock over a period of a few days to
-                                several weeks.
-                                <br />
-                            </p>
-                            <a asp-action="SwingTrade" asp-route-id="@User.Identity.Name">Swing Trade</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card" id="tradingCards">
-                        <div class="card-body">
-                            <h3 style="color:white;">Long Trade</h3>
-                            <p style="color:dimgray;">
-                                Will buy and sell stock to establish long positions in securities such as stocks, funds, currencies,
-                                options, and futures.
-                            </p>
-                            <a asp-action="LongTrade" asp-route-id="@User.Identity.Name">Long Trade</a>
-                        </div>
-                    </div>
-                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
     </div>
-
-    <script>
-        var ctx = document.getElementById('myChart');
-  
-        var equity = [100000, 104000, 105000, 106000, 108000, 105000, 107000, 104000, 108000, 109000, 108000, 109500];
-        var times = ['5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',];
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            options: {
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: 'rgb(255,255,255)',
-                        },
-                    }],
-                    yAxes: [{
-                        display: false
-                    }],                 
-                }
-            },
-            data: {
-                labels: times,
-                color: 'rgb(255,255,255)',
-                backgroundColor: 'rgb(0, 0, 0)',
-                datasets: [{
-                    data: equity,
-                    label: "Equity",
-                    borderColor: 'rgb(24, 252, 2)',
-                    pointBackgroundColor: 'rgb(24, 252, 2)',
-                    pointBorderColor: 'rgb(24, 252, 2)',
-                    pointHitRadius: 3,
-                    color: 'rgb(0, 0, 0)',
-                    fill:false,
-                    tension:0.1
-                }]
-            }
-        })
-       
-    </script>
-</body>
-
-

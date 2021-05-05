@@ -9,6 +9,7 @@
     var alpaca_secret_key = "";
 }
 
+@* Get the Alpaca keys for the user *@
 @foreach (var item in Model)
 {
     if (item.Id == @User.Identity.Name)
@@ -20,9 +21,12 @@
 
 }
 
+@* Make these keys available so they can be accessed in the React file (~/dist/index.js) *@
 <input type="hidden" id="PassingAlpacaKey" value=@alpaca_key>
 <input type="hidden" id="PassingAlpacaSecretKey" value=@alpaca_secret_key>
+
     <div class="container">
+            @* Display graph we rendered using React*@
             <div id="root"  />
             <script src="~/dist/index.js"></script>
 

@@ -69,7 +69,7 @@ class App extends React.Component {
 
         var loss_or_gain = "";
         var money_change = Math.round((current_equity - base_val) * 100) / 100;
-        if (base_val < equities[equities.length - 1]) {
+        if (base_val < current_equity) {
             loss_or_gain = "gain";
         } else {
             loss_or_gain = "loss";

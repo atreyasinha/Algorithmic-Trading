@@ -107,6 +107,8 @@ class App extends React.Component {
                         ]
                     }}
                 />
+                <p id="market_open"> Market is open Monday-Friday: 9:30AM - 4:00PM EST </p>
+                <p id="disclaimer_equity"> <i> *Equity displayed reflects your profit/loss throughout the day during market and extended hours. </i> </p>
             </div>
 
         );

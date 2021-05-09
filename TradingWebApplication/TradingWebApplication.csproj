@@ -21,4 +21,11 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\config\webpack.config.js" />
+    <None Include="wwwroot\dist\index.js" />
+    <None Include="wwwroot\dist\index.js.LICENSE.txt" />
+    <None Include="wwwroot\src\index.js" />
+  </ItemGroup>
+
 </Project>
